@@ -1,0 +1,13 @@
+
+o
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÿ¿äı
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(­øİ úÿÿÿÿ
+N	java:S106*"9Replace this use of System.out or System.err by a logger.(ÛŞ˜
+S	java:S1062"9Replace this use of System.out or System.err by a logger.(Ø—ÌÂøÿÿÿÿ
+S	java:S1063"9Replace this use of System.out or System.err by a logger.(ßúÕûÿÿÿÿ
+S	java:S106G"9Replace this use of System.out or System.err by a logger.(é® ûÿÿÿÿ
+N	java:S106N"9Replace this use of System.out or System.err by a logger.(ÛŞ˜
+S	java:S106U"9Replace this use of System.out or System.err by a logger.(£›ü÷ÿÿÿÿÿ
+S	java:S106V"9Replace this use of System.out or System.err by a logger.(Æ²²§ûÿÿÿÿ
+S	java:S106W"9Replace this use of System.out or System.err by a logger.(ßúÕûÿÿÿÿ

@@ -1,0 +1,469 @@
+{
+	"suiteName" : "ImportAndExportMasterData",
+	"suiteDescription" : "Import And Export Master Data",
+	"testCases": [
+		{
+			"testNode": {
+				"testCaseID": "IMDU_001",
+				"testCaseTitle": "Verify Login with Valid Credentials",
+				"testCaseDescription": "Verify Login with Valid Credentials",
+				"dependsOn": "",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+				{ "login": { "login_username":"", "login_password":"", "url" : "$url","testStepDescription" : "Naviagte to the Infor Cloud Suite Homepage"}},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"linkwithText":{"xpathparams":["Cloud Identities"], "continueTestNodes" : false, "testStepDescription" : "Validate the Cloud Identities button is present"}}									
+								]
+							}
+						]
+					},
+				{"clickElement" : [{"linkwithText":{"xpathparams": ["Cloud Identities"], "testStepDescription" : "Click on Cloud Identities option"}}]},
+				{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"buttonBrowse":{"xpathparams":["username"], "continueTestNodes" : false, "testStepDescription" : "Validate username is present"}}									
+								]
+							}
+						]
+					},
+				{"typeTextWithTabKey" : [{"buttonBrowse":{"xpathparams": ["username"], "value" : "$username", "testStepDescription" : "Enter username"}}]},
+				{"typeTextWithTabKey" : [{"buttonBrowse":{"xpathparams": ["pass"], "value" : "$password", "testStepDescription" : "Enter password"}}]},	
+				{"clickElement" : [{"buttonText":{"xpathparams": ["Sign In"], "testStepDescription" : "Click on Cloud Identities option"}}]},
+				{ "sleep": { "sec":"2000"}},
+			    { "login": { "login_username":"", "login_password":"", "url" : "https://mingle-portal.eu1.inforcloudsuite.com/WITTUR_AX2/04ca08d3-6911-4218-a7b6-c1c962a8e1ca","testStepDescription" : "Naviagte to the Infor Cloud Suite Homepage"}},
+			    {"frameSwitch" : [{"menuItem":{"xpathparams": ["Options"], "frame" : "m-app-frame", "by" : "class", "testStepDescription" : "Switch to IFrame"}}]},
+				{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"], "ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on OK"}}]}
+				
+			    
+			    
+			    ]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_002",
+				"testCaseTitle": "Get Files from the folder",
+				"testCaseDescription": "Read the file names from the folder",
+				"dependsOn": "IMDU_001",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+				    { "readDataAndStoreInObject": {"object":"MasterData","keys":"company,item(child),new gloabl code","cellValues":"0,4,6","folder":"mdmExcel","testStepDescription" : "Read File Names"}},
+					{ "save": { "varName": "ptr","object":"MasterData", "assign" : "0", "testStepDescription" : "Save line items to object"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_003",
+				"testCaseTitle": "Navigate to the company",
+				"testCaseDescription": "Navigate to the company",
+				"dependsOn": "IMDU_002",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "readDataFromObject": {"object":"MasterData","varName":"ptr","keys":"company,item(child),new gloabl code","testStepDescription" : "Read Data from object"}},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"menuItem":{"xpathparams":["Options"], "continueTestNodes" : false, "testStepDescription" : "Validate Options menu is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"menuItem":{"xpathparams": ["Options"], "testStepDescription" : "Click on Options menu"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"subMenuItem":{"xpathparams":["Options", "Change Company"], "continueTestNodes" : false, "testStepDescription" : "Validate Change Company option is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"subMenuItem":{"xpathparams": ["Options", "Change Company"], "testStepDescription" : "Click on Change Company under Options"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionTab":{"xpathparams":["Change Company"], "continueTestNodes" : false, "testStepDescription" : "Validate Change Company Tab is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"inputWithoutHeading":{"xpathparams": ["Selected Company:"], "testStepDescription" : "Click on Change Company under Options"}}]},
+					{"typeTextWithTabKey" : [{"inputWithoutHeading":{"xpathparams": ["Selected Company:"], "value" : "#company", "testStepDescription" : "Enter the selected company"}}]},
+					{"typeTextWithTabKey" : [{"inputWithoutHeading":{"xpathparams": ["Selected Logistic Company:"], "value" : "#company", "testStepDescription" : "Enter the Selected Logistic Company"}}]},
+					{"typeTextWithTabKey" : [{"inputWithoutHeading":{"xpathparams": ["Selected Financial Company:"], "value" : "#company", "testStepDescription" : "Enter the Selected Financial Company"}}]},
+					{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"], "testStepDescription" : "Click on OK"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_004",
+				"testCaseTitle": "Navigate to the Item By Site",
+				"testCaseDescription": "Navigate to the Item By Site",
+				"dependsOn": "IMDU_003",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"companyTab":{"xpathparams":["#company"], "continueTestNodes" : false, "testStepDescription": "Validate the Error Message for Inactive BP Details"}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"menuItem":{"xpathparams":["Options"], "continueTestNodes" : false, "testStepDescription" : "Validate Option is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"menuItem":{"xpathparams": ["Options"], "testStepDescription" : "Click on Option menu"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"subMenuItem":{"xpathparams":["Options","Run Program"], "continueTestNodes" : false, "testStepDescription" : "Validate module menu is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"subMenuItem":{"xpathparams": ["Options","Run Program"], "testStepDescription" : "Click on Module menu"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"runProgramInput":{"xpathparams":[], "continueTestNodes" : false, "testStepDescription" : "Validate run program pop up is dispalyed is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"runProgramInput":{"xpathparams": [], "testStepDescription" : "Click on Run Program Input"}}]},
+					{"typeTextWithTabKey" : [{"runProgramInputType":{"xpathparams": [], "value" : "$sessions.12","testStepDescription":"Enter the Sales Order Number"}}]},
+					{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"], "testStepDescription" : "Click on OK button"}}]},
+					{"clickElement" : [{"menuItem":{"xpathparams": ["Options"], "testStepDescription" : "Click on Option menu"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_005",
+				"testCaseTitle": "Search the item and export for 1st session",
+				"testCaseDescription": "Search the item and export",
+				"dependsOn": "IMDU_004",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"itemPlanning":{"xpathparams":[], "continueTestNodes" : false, "testStepDescription" : "Validate search button  is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"itemPlanning":{"xpathparams": [], "testStepDescription" : "Click on input filter"}}]},
+					{"typeTextWithTabKey" : [{"itemPlanning":{"xpathparams": [], "value" : "#item(child)","testStepDescription":"Enter the item"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"firstRowCheckBox":{"xpathparams":[], "continueTestNodes" : true,"waitTime" : "2", "testStepDescription" : "Validate record is displayed"}},{"then":
+									[
+									    {"clickElement" : [{"firstRowCheckBox":{"xpathparams": [], "testStepDescription" : "Click on row check box to select the row"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Actions"], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export and Import"], "ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on Export and Import menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Fields to Export..."], "testStepDescription" : "Click on Fields to Export... menu"}}]},
+										{"clickElement" : [{"fieldsToExport":{"xpathparams": [], "testStepDescription" : "Click on Fields to Export... menu"}}]},
+										{"clickElement" : [{"fieldsAction":{"xpathparams": [], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"selectForExport":{"xpathparams": [], "testStepDescription" : "Click on select for export menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Yes to all"],"ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on Yes to all button"}}]},
+										{"clickElement" : [{"fieldsToExportSaveAndClose":{"xpathparams": [], "testStepDescription" : "Click on save and close"}}]},
+										{"clickElement" : [{"labelContains":{"xpathparams": ["OK"],"ignore" : "yes", "waitTime" : "2",  "testStepDescription" : "Click on OK"}}]},
+										{"clickElement" : [{"firstRowCheckBox":{"xpathparams": [], "testStepDescription" : "Click on row check box to select the row"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Actions"], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export and Import"],"ignore" : "yes", "waitTime" : "2",  "testStepDescription" : "Click on Export and Import menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Advanced Export..."], "testStepDescription" : "Click on Advanced Export... menu"}}]},
+										{"clickElement" : [{"advancedExportDropDown":{"xpathparams": [],"ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on drop down"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Predefined set"], "ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on Predefined set"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export"], "testStepDescription" : "Click on Export"}}]},
+										{ "sleep": { "sec":"10000"}},
+										{ "moveFilesAndRename": {"file":"$sessions.12","folder":"destinationFolder","varName": "ptr","testStepDescription" : "Move Files to folder"}},
+										{ "sleep": { "sec":"2000"}},
+										{ "updateExcelValue": {"value":"$sessions.12","cellValue": "#new gloabl code","rowNum": "1","cellNum": "6","varName": "ptr","testStepDescription" : "Update the excel"}}	
+										
+									]
+									}									
+								]
+							}
+						]
+					}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_006",
+				"testCaseTitle": "Search the item and import for 1st session",
+				"testCaseDescription": "Search the item and import",
+				"dependsOn": "IMDU_005",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"itemPlanning":{"xpathparams":[], "continueTestNodes" : false, "testStepDescription" : "Validate search button  is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"itemPlanning":{"xpathparams": [], "testStepDescription" : "Click on input filter"}}]},
+					{"typeTextWithTabKey" : [{"itemPlanning":{"xpathparams": [], "value" : "#item(child)","testStepDescription":"Enter the item"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"firstRowCheckBox":{"xpathparams":[], "continueTestNodes" : true,"waitTime" : "2", "testStepDescription" : "Validate record is displayed"}},
+									{"then":
+									
+									[
+									    {"clickElement" : [{"firstRowCheckBox":{"xpathparams": [], "testStepDescription" : "Click on checkbox"}}]},
+									    {"clickElement" : [{"labelwithText":{"xpathparams": ["Actions"], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export and Import"], "testStepDescription" : "Click on Export and Import menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Import"], "testStepDescription" : "Click on Import menu"}}]},
+										{"clickElement" : [{"errorOccursDropDown":{"xpathparams": [], "testStepDescription" : "Click on Error Occurence drop down"}}]},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Continue","1"], "tesStepDescription": "Click on Continue"}}]},
+										{"clickElement" : [{"afterImportDropDown":{"xpathparams": [], "testStepDescription" : "Click on After Import drop down"}}]},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Prompt","1"], "tesStepDescription": "Click on Prompt"}}]},
+										{"clickElement" : [{"appendTextDropDown":{"xpathparams": [], "testStepDescription" : "Click on Append Text drop down"}}]},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Replace","2"], "tesStepDescription": "Click on Replace"}}]},
+										{"clickElement" : [{"fileImport":{"xpathparams": [], "tesStepDescription": "Click on File Upload Input"}}]},
+										{"roboFileUpload" : [{"fileImport":{"xpathparams": [], "filename": "$sessions.12","varName": "ptr",  "tesStepDescription": "Click on File Upload Input"}}]},
+										{ "sleep": { "sec":"2000"}},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Import","2"], "tesStepDescription": "Click on Import"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Yes"],"ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on Yes button"}}]},
+										{ "sleep": { "sec":"10000"}},
+										{ "moveFilesAndRename": {"file":"$sessions.12","folder":"importedFiles","varName": "ptr","testStepDescription" : "Move Files to folder"}},
+										{ "sleep": { "sec":"2000"}},
+										{"clickElement" : [{"sessionSaveandClose":{"xpathparams": ["$sessions.12"], "testStepDescription" : "Click on Export"}}]},
+										{ "readDataFromExcel": {"file":"$sessions.12","folder":"importedFiles","varName": "ptr","keys":"importStatus,importCode,importMessage","cellValues":"0,1,2","object": "importData","testStepDescription" : "Read Excel"}},
+										{ "sleep": { "sec":"2000"}},
+										{ "writeExcelValue": {"oldItem":"#item(child)","newItem":"#new gloabl code","session":"$sessions.12","sessionName":"sessionDescription","folder":"mdmStatusExcel","keys":"importStatus,importCode,importMessage","automationStatus":"true","sheetName":"ItemUpdate","object": "importData","testStepDescription" : "Read Excel"}}
+											
+									 ]
+									},
+									{"else":
+									[
+										{"clickElement" : [{"sessionSaveandClose":{"xpathparams": ["$sessions.12"], "testStepDescription" : "Click on Export"}}]},
+										{ "sleep": { "sec":"2000"}},
+										{ "writeExcelValue": {"oldItem":"#item(child)","newItem":"#new gloabl code","session":"$sessions.12","sessionName":"sessionDescription","folder":"mdmStatusExcel","keys":"importStatus,importCode,importMessage","automationStatus":"false","sheetName":"ItemUpdate","object": "importData","testStepDescription" : "Read Excel"}}
+									]
+									}
+																		
+								]
+							}
+						]
+					}
+					
+					
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_007",
+				"testCaseTitle": "Navigate to the Mapping By Master Category",
+				"testCaseDescription": "Navigate to the Mapping By Master Category",
+				"dependsOn": "IMDU_006",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"companyTab":{"xpathparams":["#company"], "continueTestNodes" : false, "testStepDescription": "Validate the Error Message for Inactive BP Details"}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"menuItem":{"xpathparams":["Options"], "continueTestNodes" : false, "testStepDescription" : "Validate Option is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"menuItem":{"xpathparams": ["Options"], "testStepDescription" : "Click on Option menu"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"subMenuItem":{"xpathparams":["Options","Run Program"], "continueTestNodes" : false, "testStepDescription" : "Validate module menu is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"subMenuItem":{"xpathparams": ["Options","Run Program"], "testStepDescription" : "Click on Module menu"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"runProgramInput":{"xpathparams":[], "continueTestNodes" : false, "testStepDescription" : "Validate run program pop up is dispalyed is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"runProgramInput":{"xpathparams": [], "testStepDescription" : "Click on Run Program Input"}}]},
+					{"typeTextWithTabKey" : [{"runProgramInputType":{"xpathparams": [], "value" : "$mappingByMaster","testStepDescription":"Enter the Sales Order Number"}}]},
+					{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"], "testStepDescription" : "Click on OK button"}}]},
+					{"clickElement" : [{"menuItem":{"xpathparams": ["Options"], "testStepDescription" : "Click on Option menu"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_008",
+				"testCaseTitle": "Search the item and export for 1st session",
+				"testCaseDescription": "Search the item and export",
+				"dependsOn": "IMDU_007",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"legacyItemCodeFilter":{"xpathparams":[], "continueTestNodes" : false, "testStepDescription" : "Validate search button  is displayed"}}									
+								]
+							}
+						]
+					},
+					{"typeTextWithTabKey" : [{"legacyItemCodeFilter":{"xpathparams": [], "value" : "#item(child)","testStepDescription":"Enter the item"}}]},
+					{ "sleep": { "sec":"5000"}},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"firstRowCheckBox":{"xpathparams":[], "continueTestNodes" : true,"waitTime" : "2", "testStepDescription" : "Validate record is displayed"}},
+									{"then":
+									[
+									    {"clickElement" : [{"firstRowCheckBox":{"xpathparams": [], "testStepDescription" : "Click on row check box to select the row"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Actions"], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export and Import"], "testStepDescription" : "Click on Export and Import menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Fields to Export..."], "testStepDescription" : "Click on Fields to Export... menu"}}]},
+										{"clickElement" : [{"fieldsToExport":{"xpathparams": [], "testStepDescription" : "Click on Fields to Export... menu"}}]},
+										{"clickElement" : [{"fieldsAction":{"xpathparams": [], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"selectForExport":{"xpathparams": [], "testStepDescription" : "Click on select for export menu"}}]},
+										{"clickElement" : [{"fieldsToExportSaveAndClose":{"xpathparams": [], "testStepDescription" : "Click on save and close"}}]},
+										{"clickElement" : [{"labelContains":{"xpathparams": ["OK"],"ignore" : "yes", "waitTime" : "2",  "testStepDescription" : "Click on OK"}}]},
+										{"clickElement" : [{"firstRowCheckBox":{"xpathparams": [], "testStepDescription" : "Click on row check box to select the row"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Actions"], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export and Import"], "testStepDescription" : "Click on Export and Import menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Advanced Export..."], "testStepDescription" : "Click on Advanced Export... menu"}}]},
+										{"clickElement" : [{"advancedExportDropDown":{"xpathparams": [],"ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on drop down"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Predefined set"], "ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on Predefined set"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export"], "testStepDescription" : "Click on Export"}}]},
+										{ "sleep": { "sec":"10000"}},
+										{ "moveFilesAndRename": {"file":"$mappingByMaster","folder":"destinationFolder","varName": "ptr","testStepDescription" : "Move Files to folder"}},
+										{ "sleep": { "sec":"2000"}},
+										{ "updateExcelValue": {"value":"$mappingByMaster","cellValue": "#new gloabl code","rowNum": "1","cellNum": "8","varName": "ptr","testStepDescription" : "Update the excel"}}	
+										
+									]
+									}									
+								]
+							}
+						]
+					}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "IMDU_009",
+				"testCaseTitle": "Search the item and import for 1st session",
+				"testCaseDescription": "Search the item and import",
+				"dependsOn": "IMDU_008",
+				"tags":["SmokeTest","IMDU","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"legacyItemCodeFilter":{"xpathparams":[], "continueTestNodes" : false, "testStepDescription" : "Validate search button  is displayed"}}									
+								]
+							}
+						]
+					},
+					{"typeTextWithTabKey" : [{"legacyItemCodeFilter":{"xpathparams": [], "value" : "#item(child)","testStepDescription":"Enter the item"}}]},
+					{ "sleep": { "sec":"5000"}},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"firstRowCheckBox":{"xpathparams":[], "continueTestNodes" : true,"waitTime" : "2", "testStepDescription" : "Validate record is displayed"}},
+									{"then":
+									
+									[
+									    {"clickElement" : [{"labelwithText":{"xpathparams": ["Actions"], "testStepDescription" : "Click on Actions menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Export and Import"], "testStepDescription" : "Click on Export and Import menu"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Import"], "testStepDescription" : "Click on Import menu"}}]},
+										{"clickElement" : [{"errorOccursDropDown":{"xpathparams": [], "testStepDescription" : "Click on Error Occurence drop down"}}]},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Continue","1"], "tesStepDescription": "Click on Continue"}}]},
+										{"clickElement" : [{"afterImportDropDown":{"xpathparams": [], "testStepDescription" : "Click on After Import drop down"}}]},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Prompt","1"], "tesStepDescription": "Click on Prompt"}}]},
+										{"clickElement" : [{"appendTextDropDown":{"xpathparams": [], "testStepDescription" : "Click on Append Text drop down"}}]},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Replace","2"], "tesStepDescription": "Click on Replace"}}]},
+										{"clickElement" : [{"fileImport":{"xpathparams": [], "tesStepDescription": "Click on File Upload Input"}}]},
+										{"roboFileUpload" : [{"fileImport":{"xpathparams": [], "filename": "$mappingByMaster","varName": "ptr",  "tesStepDescription": "Click on File Upload Input"}}]},
+										{ "sleep": { "sec":"2000"}},
+										{"clickElement" : [{"labelwithTextIndex":{"xpathparams": ["Import","2"], "tesStepDescription": "Click on Import"}}]},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["Yes"],"ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on Yes button"}}]},
+										{ "sleep": { "sec":"10000"}},
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"],"ignore" : "yes", "waitTime" : "2", "testStepDescription" : "Click on OK button"}}]},
+										{ "moveFilesAndRename": {"file":"$mappingByMaster","folder":"importedFiles","varName": "ptr","testStepDescription" : "Move Files to folder"}},
+										{ "sleep": { "sec":"2000"}},
+										{"getText": [{"sessionTabName":{"xpathparams": [], "varName" : "sessionDescription","testStepDescription":"Get the session name"}}]},
+										{"clickElement" : [{"sessionSaveandClose":{"xpathparams": ["$mappingByMaster"], "testStepDescription" : "Click on Export"}}]},
+										{ "readDataFromExcel": {"file":"$mappingByMaster","folder":"importedFiles","varName": "ptr","keys":"importStatus,importCode,importMessage","cellValues":"0,1,2","object": "mappingByMaster","testStepDescription" : "Read Excel"}},
+										{ "sleep": { "sec":"2000"}},
+										{ "writeExcelValue": {"oldItem":"#item(child)","newItem":"#new gloabl code","session":"$mappingByMaster","sessionName":"sessionDescription","folder":"mdmStatusExcel","keys":"importStatus,importCode,importMessage","automationStatus":"true","sheetName":"MappingByMaster","object": "mappingByMaster","testStepDescription" : "Read Excel"}}
+											
+									 ]
+									},
+									{"else":
+									[
+										{"getText": [{"sessionTabName":{"xpathparams": [], "varName" : "sessionDescription","testStepDescription":"Get the session name"}}]},
+										{ "sleep": { "sec":"2000"}},
+										{"clickElement" : [{"sessionSaveandClose":{"xpathparams": ["$mappingByMaster"], "testStepDescription" : "Click on Export"}}]},
+										{ "sleep": { "sec":"2000"}},
+										{ "writeExcelValue": {"oldItem":"#item(child)","newItem":"#new gloabl code","session":"$mappingByMaster","sessionName":"sessionDescription","folder":"mdmStatusExcel","keys":"importStatus,importCode,importMessage","automationStatus":"false","sheetName":"MappingByMaster","object": "mappingByMaster","testStepDescription" : "Read Excel"}}
+									]
+									}
+																		
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+			
+		
+		
+	]
+}

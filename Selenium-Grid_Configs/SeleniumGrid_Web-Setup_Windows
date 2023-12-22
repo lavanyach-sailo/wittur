@@ -1,0 +1,23 @@
+C:\TestAutomation\SeleniumWebServer\selenium-server-standalone-3.141.59.jar
+
+java -jar $seleniumGridPath -role hub -hubConfig hubconfig.json
+
+java -Dwebdriver.chrome.driver="chromedriver-5" -Dwebdriver.gecko.driver="gekodriver" -jar selenium-server-standalone-3.141.59.ja-role node -nodeConfig  /Users/rakeshkumargannu/git/Pattesa-TestAutomation/PattesaTestAutomationWeb/Selenium-Grid_Appium_Configs/Web-Node1.json
+
+mvn clean test -PRegressionTest -e -Dtestng.show.stack.frames=true -X
+
+
+
+
+
+
+
+
+cd C:\TestAutomation
+java -jar selenium-server-standalone-3.141.59.jar -role hub -hubConfig hubconfig.json
+
+cd C:\TestAutomation
+java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -nodeConfig  Web-Node1.json
+
+chdir C:\Users\Rakesh\Documents\GitHub\Pattesa-TestAutomation\PattesaTestAutomationWeb
+mvn clean test -PRegressionTest -e -Dtestng.show.stack.frames=true -X

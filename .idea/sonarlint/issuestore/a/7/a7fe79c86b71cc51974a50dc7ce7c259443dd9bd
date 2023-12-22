@@ -1,0 +1,105 @@
+
+w
+java:S2293Ò"YReplace the type specification in this constructor call with the diamond operator ("<>").(£ææœ8ãñçÿ‚1
+|
+java:S2293í"YReplace the type specification in this constructor call with the diamond operator ("<>").(µÓ°úÿÿÿÿ8êñçÿ‚1
+w
+java:S2293‘"YReplace the type specification in this constructor call with the diamond operator ("<>").(¦ÌÓù8êñçÿ‚1
+w
+java:S2293š"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ñõ‡„8êñçÿ‚1
+m
+java:S1192k"KDefine a constant instead of duplicating this literal "launchedBy" 4 times.(ğ¹™Ïùÿÿÿÿ8ëñçÿ‚1
+l
+java:S1192i"JDefine a constant instead of duplicating this literal "releaseID" 3 times.(Äø²ßøÿÿÿÿ8ëñçÿ‚1
+d
+java:S1192v"GDefine a constant instead of duplicating this literal "status" 3 times.(úıÁœ8ëñçÿ‚1
+s
+java:S11928"QDefine a constant instead of duplicating this literal "connectionString" 3 times.(€½€öûÿÿÿÿ8ëñçÿ‚1
+b
+java:S1192x"FDefine a constant instead of duplicating this literal "total" 4 times.(…ª>8ëñçÿ‚1
+g
+java:S1192e"JDefine a constant instead of duplicating this literal "jsonFiles" 5 times.(Œô›©8ëñçÿ‚1
+X
+java:S1141¨"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8íñçÿ‚1
+9
+java:S1643a"Use a StringBuilder instead.(Ø„â¨8îñçÿ‚1
+>
+java:S1643b"Use a StringBuilder instead.(Î›Ø™ûÿÿÿÿ8îñçÿ‚1
+n
+java:S1226¹"PIntroduce a new variable instead of reusing the parameter "approximateDuration".(ğ±8ÿñçÿ‚1
+f
+java:S2259ï"CA "NullPointerException" could be thrown; "date2" is nullable here.(¡²øŞıÿÿÿÿ8¢èÿ‚1
+f
+java:S2259ï"CA "NullPointerException" could be thrown; "date1" is nullable here.(¡²øŞıÿÿÿÿ8¢èÿ‚1
+k
+java:S22598"IA "NullPointerException" could be thrown; "mongodbProp" is nullable here.(€½€öûÿÿÿÿ8¢èÿ‚1
+l
+java:S2095Ä"IUse try-with-resources or close this "InputStream" in a "finally" clause.(¤ˆÓöşÿÿÿÿ8¢èÿ‚1
+]	java:S107C"<Method has 8 parameters, which is greater than 7 authorized.(†Ã¢‰üÿÿÿÿ8¢¢èÿ‚1
+Y	java:S107°"=Method has 10 parameters, which is greater than 7 authorized.(çÜ÷8¢¢èÿ‚1
+Z	java:S107ó"=Method has 10 parameters, which is greater than 7 authorized.(Ò“úº8¢¢èÿ‚1
+U	java:S1064"9Replace this use of System.out or System.err by a logger.(†ĞÎ8§¢èÿ‚1
+Z	java:S1068"9Replace this use of System.out or System.err by a logger.(€½€öûÿÿÿÿ8§¢èÿ‚1
+E	java:S108=")Either remove or fill this block of code.(Úîø›8¬¢èÿ‚1
+Z	java:S106?"9Replace this use of System.out or System.err by a logger.(öÇ£ùÿÿÿÿ8¬¢èÿ‚1
+s
+java:S2159Y"VRemove this call to "equals"; comparisons between unrelated types always return false.(˜¤ğç8À¢èÿ‚1
+V	java:S106€"9Replace this use of System.out or System.err by a logger.(îĞİ´8Ó¢èÿ‚1
+U	java:S106ƒ"9Replace this use of System.out or System.err by a logger.(Ö•ãd8Ô¢èÿ‚1
+Y	java:S125"<This block of commented-out lines of code should be removed.(ü¼ÔŞ8Ö¢èÿ‚1
+V	java:S106§"9Replace this use of System.out or System.err by a logger.(îĞİ´8Ö¢èÿ‚1
+U	java:S106ª"9Replace this use of System.out or System.err by a logger.(Ö•ãd8×¢èÿ‚1
+V	java:S106Ğ"9Replace this use of System.out or System.err by a logger.(ıĞ Æ8á¢èÿ‚1
+Y	java:S125Ï"<This block of commented-out lines of code should be removed.(¦éÍ8á¢èÿ‚1
+U	java:S106Ó"9Replace this use of System.out or System.err by a logger.(™É58å¢èÿ‚1
+[	java:S106à"9Replace this use of System.out or System.err by a logger.(¯µ‰†ÿÿÿÿÿ8ç¢èÿ‚1
+U
+java:S1135ã"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8ç¢èÿ‚1
+V	java:S106é"9Replace this use of System.out or System.err by a logger.(°â­Ù8è¢èÿ‚1
+U
+java:S1135ì"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8è¢èÿ‚1
+V	java:S106‘"9Replace this use of System.out or System.err by a logger.(ıĞ Æ8ñ¢èÿ‚1
+Y	java:S125"<This block of commented-out lines of code should be removed.(¦éÍ8ñ¢èÿ‚1
+U	java:S106”"9Replace this use of System.out or System.err by a logger.(™É58ò¢èÿ‚1
+h
+java:S2147È"ECombine this catch with the one at line 325, which has the same body.(¢­§Œÿÿÿÿÿ8ø¢èÿ‚1
+F
+java:S1659¯"#Declare "value" on a separate line.(åú„€øÿÿÿÿ8ù¢èÿ‚1
+V	java:S106£"9Replace this use of System.out or System.err by a logger.(• Ö8û¢èÿ‚1
+V	java:S106­"9Replace this use of System.out or System.err by a logger.(Ú¶ñÏ8§£èÿ‚1
+[	java:S106Ã"9Replace this use of System.out or System.err by a logger.(à‡Şùÿÿÿÿ8«£èÿ‚1
+U
+java:S1135Æ"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8¬£èÿ‚1
+U
+java:S1135É"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8¬£èÿ‚1
+`
+java:S1659Ô"BDeclare "value" and all following declarations on a separate line.(†ƒâğ8³£èÿ‚1
+V	java:S106Û"9Replace this use of System.out or System.err by a logger.(• Ö8µ£èÿ‚1
+V	java:S106å"9Replace this use of System.out or System.err by a logger.(Ú¶ñÏ8½£èÿ‚1
+L
+java:S1905ê")Remove this unnecessary cast to "Object".(“ù˜şÿÿÿÿ8¿£èÿ‚1
+^	java:S125ì"<This block of commented-out lines of code should be removed.(ºÇğ„üÿÿÿÿ8À£èÿ‚1
+Y	java:S125õ"<This block of commented-out lines of code should be removed.(ÁÊ¦­8Â£èÿ‚1
+^	java:S125÷"<This block of commented-out lines of code should be removed.(·¹¼éøÿÿÿÿ8Â£èÿ‚1
+[	java:S106ü"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8Â£èÿ‚1
+p
+java:S3776…"RRefactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.(çÚ£8Ã£èÿ‚1
+Y	java:S125¤"<This block of commented-out lines of code should be removed.(êšµ¸8Ø£èÿ‚1
+D
+java:S1075²"&Remove this hard-coded path-delimiter.(¢€¢ì8Ü£èÿ‚1
+I
+java:S1075±"&Remove this hard-coded path-delimiter.(şáü ûÿÿÿÿ8Ü£èÿ‚1
+V	java:S106¶"9Replace this use of System.out or System.err by a logger.(¾Ú–±8İ£èÿ‚1
+[	java:S106Ø"9Replace this use of System.out or System.err by a logger.(û•Ÿ·ùÿÿÿÿ8ø£èÿ‚1
+[	java:S106Ù"9Replace this use of System.out or System.err by a logger.(õƒ¿©ûÿÿÿÿ8ø£èÿ‚1
+V	java:S106Ú"9Replace this use of System.out or System.err by a logger.(Ë°è¯8ù£èÿ‚1
+[	java:S106Û"9Replace this use of System.out or System.err by a logger.(û•Ÿ·ùÿÿÿÿ8ù£èÿ‚1
+V	java:S106ß"9Replace this use of System.out or System.err by a logger.(‰ĞúÂ8ú£èÿ‚1
+V	java:S106á"9Replace this use of System.out or System.err by a logger.(é“´ç8ú£èÿ‚1
+[	java:S106å"9Replace this use of System.out or System.err by a logger.(ã¨†½øÿÿÿÿ8û£èÿ‚1
+V	java:S106ç"9Replace this use of System.out or System.err by a logger.(şµ‚ò8û£èÿ‚1
+M
+java:S2093‡"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ8ü£èÿ‚1
+[	java:S106ô"9Replace this use of System.out or System.err by a logger.(Øù«‰ùÿÿÿÿ8ı£èÿ‚1
+M
+java:S1197ø"*Move the array designators [] to the type.(¡şÏÖøÿÿÿÿ8ş£èÿ‚1

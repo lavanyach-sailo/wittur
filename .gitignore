@@ -1,0 +1,14 @@
+/target/
+/Screens/
+/screenshots/
+/SuccessScreens/
+/OldFailedScreens/
+/FailedScreens/
+/TempScreens/
+/test-output/
+/logs/
+*debug.log
+/.classpath
+/bin/
+resources/temp
+resources/modules

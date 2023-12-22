@@ -1,0 +1,140 @@
+"testNode":{
+	"testCaseID":"",
+	"preReq":{
+		"navActions":{[
+			{<navActionNode>}
+		]}
+	},
+	"validations":[
+		<validationNode>,
+		<validationNode>
+	]	
+}
+
+
+
+<navActionNode> structure:
+=========================
+{
+	"<actionKey>":{"<xpathKey>":"<parameterizedValue>"}
+}
+
+<actionKey> ----> To represent a generic or unique UI action.
+<xpathKey> -----> Represents a unique key to be used to fetch the xpath from a properties file.
+<parameterizedValue> -------> Parameterized value which is the base for parameterization from json file.
+
+{
+	"<actionKey>":
+		{
+			"relativeXpath":"<parameterizedValue>",
+			"<xpathKey>":"<parameterizedValue>"
+		}
+}
+<relativeXpath> ------> Helps is building relative xpaths for hierarchial UI objects, this avoids the clutter of creating levels context in xpath.
+
+Example Structure:
+==================
+Root (<xpathKey>)
+	--> child1 (<relativeXpathChild1>)
+		--> subchild11 (<relativeXpathsubChild11>)
+	--> child2 (<relativeXpathChild2>)
+		--> subchild21 (<relativeXpathsubChild21>)
+		--> subchild22 (<relativeXpathsubChild22>)
+		
+Sample json strutures for the above mentioned:
+==============================================
+**RootNode
+{
+	"<actionKey>":{"<xpathKey>":"<parameterizedValue>"}
+}		
+**Child1 Node
+{
+	"<actionKey>":
+	{
+		"relativeXpath":"relativeXpathChild1"
+		"<xpathKey>":"<parameterizedValue>"
+	}
+}		
+**SubChild21 Node
+{
+	"<actionKey>":
+	{
+		"relativeXpath":"relativeXpathChild2"+"relativeXpathChild21"
+		"<xpathKey>":"<parameterizedValue>"
+	}
+}
+
+
+<navActionNode> extended structures:
+====================================		
+{
+	"<actionKey>":{"<xpathKey>":"<parameterizedValue>"}
+	{<"validations">}
+}
+{
+	"<actionKey>":{"<xpathKey>":"<parameterizedValue>"}
+	{<"validations">},
+	{<navActionNode>}
+}
+
+
+
+
+
+<validationNode> structure:
+===========================
+{
+	"<validationType>":{"xpathKey":"parameterizedValue"}
+}
+
+<validationType> -------> Determines the validation method to be dynamically used in the generic automation code.
+<xpathKey>, <parameterizedValue> refer to the above documentation.
+
+Example:
+========
+The following validation json node should be parsed in such a way that, 
+isDisplayed should map to a validation code snippet(i.e. Say a generic method) at runtime and pass the xpath->"productRadioButton" and the product value: "Product-1002" as the parameters for validation.
+{
+	"isDisplayed":{"productRadioButton":"Product-1002"}
+}
+
+
+
+
+
+
+**********Generalized structures vs Specialized structures**********
+====================================================================
+
+Generic NavAction Node:
+=======================
+{
+	"clickRadioButtom":{"ProductRadioButton":"Product-1002"}
+}
+
+Specialized/Customized NavAction Node:
+======================================
+{
+	"clickProductRadioButton":"Product-1002"
+}
+
+::::::::::Description:::::::::::
+* Generic Navaction node follows and uses generic framework level actions like: "clickRadioButton","expandDropdown","typeText" etc. 
+	This helps in provisioning the framework users with generic structural constructs to be used for any UI navigation scenarios.
+	And these actions to be packaged into the generic framework only.
+* Specialized/Customized Navaction node doesn't need to follow the generic action node structural construct. But they need to be as much generic and extendable for future scope of the use cases.
+	Also the code implementation for parsing this node should be separated out of the generic framework context as per the need. 
+
+**Note:- Above mentioned generalized and specialized/customized	context applies to validationNodes also.
+
+
+
+===========================================================	
+:::::::::::::********Development Guide********:::::::::::::
+===========================================================
+--> Any new ActionNode or ValidationNode structure should be discussed and approved before development.
+--> Make sure to assess and check extendability of specialized structures for all of the test use cases before development.
+
+--> All of the xpaths should be externalized to properties file/files. Relative xpaths can be provided in the json using the "relativeXpath" key.
+--> Every functional, non-fuctional aspect of the code should be well documented during the development itself.
+--> All of the checkins or pull requests to be validated for coding standards while in development.

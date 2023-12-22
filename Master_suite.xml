@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="ONT Suite" parallel="none">
+
+	<suite-files>
+		<suite-file path="configure_suite.xml"/>
+		<suite-file path="ISAM_FX_LTs_suite.xml" />
+		<suite-file path="ISAM_FX_Uplinks_suite.xml" />
+		<suite-file path="ISAM_FX_Overview_suite.xml" />
+		<suite-file path="ISAM_FX_Rack_Shelf_suite.xml" />
+	</suite-files>
+</suite> 

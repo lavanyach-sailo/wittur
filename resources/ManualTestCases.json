@@ -1,0 +1,83 @@
+{
+	"suiteName" : "ManualTestCases",
+	"suiteDescription" : "Manual Test Cases",
+	"testCases": [
+		{
+			
+			"testNode": {
+				"testCaseID": "MTC_001",
+				"testCaseTitle": "Verify Login with Valid Credentials",
+				"testCaseDescription": "Infor LN Login",
+				"dependsOn": "manual",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "manual": { "testStepDescription" : "Login with valid username and password", "expected" : "User should be able to login"}},
+					{ "manual": { "testStepDescription" : "Verify user login", "expected" : "Login successful"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "MTC_002",
+				"testCaseTitle": "Verify Order Intake Workbench",
+				"testCaseDescription": "Navigate to Purchase Order Intake Workbench",
+				"dependsOn": "manual",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "manual": { "testStepDescription" : "Valiadte the menu bar", "expected" : "Validate the Menu Bar"}},
+					{ "manual" : { "testStepDescription" : "Click on Infor LN Menu", "expected" : "Click on Infor LN Menu "}},
+					{"manual" : {"testStepDescription" : "Click on Procurement under Infor LN", "expected" : "Click on Procurement under Infor LN"}},
+					{"manual" : {"testStepDescription" : "Click on Orders under Procurement", "expected" : "Click on Orders under Procurement"}},
+					{"manual" : {"testStepDescription" : "Click on Order Intake Workbench under Orders", "expected" : "Click on Order Intake Workbench under Orders"}},
+					{"manual" : {"testStepDescription" : "Validate PO WorkBench Tab is displayed", "expected" : "Validate PO WorkBench Tab is displayed"}}
+				]
+			}
+		},
+		 
+		{
+			"testNode": {
+				"testCaseID": "MTC_003",
+				"testCaseTitle": "Verify New PO form",
+				"testCaseDescription": "Creating New Purchase Order Form",
+				"dependsOn": "manual",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"manual" : {"testStepDescription" : "Click on New button on PO Workbench Tab",  "expected" : "Click on New button on PO Workbench Tab"}},
+					{"manual" : {"testStepDescription" : "Validate PO Tab is displayed",  "expected" : "Validate PO Tab is displayed"}}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "MTC_004",
+				"testCaseTitle": "Verify Inactive BP for PO",
+				"testCaseDescription": "Validate Invalid Business Partner for Purchase Order",
+				"dependsOn": "manual",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"manual" : {"testStepDescription" : "Enter Inactive BP Details", "expected" : "Enter Inactive BP Details"}},
+					{"manual" : {"testStepDescription" : "Validate the Error Message for Inactive BP Details", "expected" : "Validate the Error Message for Inactive BP Details"}},
+					{"manual" : {"testStepDescription": "Click on OK button to close the error message","expected" : "Click on OK button to close the error message"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "MTC_005",
+				"testCaseTitle": "Verify Active BP for PO",
+				"testCaseDescription": "Validate valid Business Partner for Purchase Order",
+				"dependsOn": "manual",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"manual" : {"testStepDescription" : "Click on Search Button to search the Bussiness Partner","expected" : "Click on Search Button to search the Bussiness Partner"}},
+					{"manual" : {"testStepDescription" : "Enter Active BP value","expected" : "Enter Active BP value"}},
+					{"manual" : {"testStepDescription": "Click on check box","expected" : "Click on check box"}},
+					{"manual" : {"testStepDescription" : "Click on Ok Button","expected" : "Click on Ok Button"}}
+				]
+			}
+		}
+	
+	]
+}
+

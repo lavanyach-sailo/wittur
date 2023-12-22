@@ -1,0 +1,609 @@
+{
+	"suiteName" : "Oracle P2P ",
+	"suiteDescription" : "Oracle Procure to pay Suite",
+	"testCases": [
+		{
+			"testNode": {
+				"testCaseID": "P2P_001",
+				"testCaseTitle": "Verify Login with Valid Credentials",
+				"testCaseDescription": "User Login",
+				"dependsOn": "",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+				{ "login": { "login_username":"", "login_password":"", "url" : "https://ucf6-zxvh-fa-ext.oracledemos.com/","testStepDescription" : "Login with valid username and password"}},
+				{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"inputName":{"xpathparams":["userid"], "continueTestNodes" : false, "testStepDescription" : "Validate the user name field"}}									
+								]
+							}
+						]
+				},
+				{"typeTextWithTabKey" : [{"inputName":{"xpathparams": ["userid"], "value" : "$user", "testStepDescription" : "Enter valid username"}}]},					
+				{"typeTextWithTabKey" : [{"inputName":{"xpathparams": ["password"], "value" : "$Password", "testStepDescription" : "Enter valid password"}}]},
+				{"clickElement" : [{"buttonwithClass":{"xpathparams": ["Sign In"],"testStepDescription" : "Click on Sign in Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"anchorWithTtile":{"xpathparams":["Oracle Logo Home"], "continueTestNodes" : false, "testStepDescription" : "Successfully Logged in and validate Oracle Logo Homepage"}}									
+								]
+							}
+						]
+					}			
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_002",
+				"testCaseTitle": "Navigate to Procurement page",
+				"testCaseDescription": "Navigate to Procurement page",
+				"dependsOn": "P2P_001",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"anchorWithTtile":{"xpathparams":["Navigator"], "continueTestNodes" : false, "testStepDescription" : "Validate Navigator as side menu button"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Navigator"],"testStepDescription" : "Click on Menu Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Procurement"], "continueTestNodes" : false, "testStepDescription" : "Validate Procurement as side menu title"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Procurement"],"testStepDescription" : "Click on Procurement Button"}}]},					
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Purchase Orders"], "continueTestNodes" : false, "testStepDescription" : "Validate the Purchase Orders link"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Purchase Orders"],"testStepDescription" : "Click on Purchase Orders Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Tasks"], "continueTestNodes" : false, "testStepDescription" : "Validate the Tasks bar"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"divWithTitle":{"xpathparams": ["Tasks"],"testStepDescription" : "Click on Tasks Button"}}]},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Create Order"],"testStepDescription" : "Click on Create Order link"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Create Order"], "continueTestNodes" : false, "testStepDescription" : "Validate the Create Order tab"}}									
+								]
+							}
+						]
+					}					
+										
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_003",
+				"testCaseTitle": "Enter Sipplier field",
+				"testCaseDescription": "Enter Supplier input field",
+				"dependsOn": "P2P_002",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputSupplier":{"xpathparams": ["Supplier"], "value" : "$supplier","testStepDescription" : "Enter valid Supplier value"}}]},
+					{"clickElement" : [{"buttonwithClass":{"xpathparams": ["Create"],"testStepDescription" : "Click on Create Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Edit Document (Purchase Order)"], "continueTestNodes" : false, "testStepDescription" : "Validate Edit Document (Purchase Order) as header title"}}									
+								]
+							}
+						]
+					},
+					{"getText": [{"orderNumber":{"xpathparams": ["Order"], "varName" : "purchaseOrderNumber","testStepDescription":"Get the genrated purchase order number and save"}}]}
+									
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_004",
+				"testCaseTitle": "Add new line",
+				"testCaseDescription": "Add new line and enter line input fields",
+				"dependsOn": "P2P_003",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"divWithTitle":{"xpathparams": ["Add Row"],"testStepDescription" : "Click on New line Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"lineInputs":{"xpathparams":["Item::content"], "continueTestNodes" : false, "testStepDescription" : "Validate the Item input field"}}									
+								]
+							}
+						]
+					},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["Item::content"], "value" : "$item","testStepDescription" : "Enter valid Item field"}}]},
+					{ "sleep": { "sec":"2000"}},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": [":Quantity::content"], "value" : "$quantity","testStepDescription" : "Enter valid Quantity value"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["ListPriceGoods::content"], "value" : "$price","testStepDescription" : "Enter valid Base price value"}}]},
+					{ "keyBoardEvent": { "tab":"2"}},		
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Schedules"],"testStepDescription" : "Click on Schedules tab"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["NeedByDt::content"], "value" : "$requestedDate","testStepDescription" : "Enter valid requested date"}}]},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Save"],"testStepDescription" : "Click on Save button"}}]},
+					{ "sleep": { "sec":"2000"}},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Last Saved"], "continueTestNodes" : false, "testStepDescription" : "Validate the Last saved field"}}									
+								]
+							}
+						]
+					},
+					{"getText": [{"amount":{"xpathparams": ["Total"], "varName" : "totalAmount","testStepDescription":"Get the Total amount and save"}}]},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Submit"],"testStepDescription" : "Click on Submit button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Confirmation"], "continueTestNodes" : false, "testStepDescription" : "Validate the Confirmation popup "}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"buttonWithTextNS":{"xpathparams":["OK"], "continueTestNodes" : false, "testStepDescription" : "Validate the OK button"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["OK"],"testStepDescription" : "Click on OK button"}}]}
+					
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_005",
+				"testCaseTitle": "Manage Orders",
+				"testCaseDescription": "Order status should be open",
+				"dependsOn": "P2P_004",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Tasks"], "continueTestNodes" : false, "testStepDescription" : "Validate the Tasks bar"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"divWithTitle":{"xpathparams": ["Tasks"],"testStepDescription" : "Click on Tasks Button"}}]},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Manage Orders"],"testStepDescription" : "Click on Manage Orders link"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Manage Orders"], "continueTestNodes" : false, "testStepDescription" : "Validate the Manage Orders tab"}}									
+								]
+							}
+						]
+					},				
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["value40::content"], "varName" : "purchaseOrderNumber","testStepDescription": "Enter the purchase order number in the Order input field"}}]},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Search"],"testStepDescription" : "Click on Search button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Open"], "continueTestNodes" : false, "testStepDescription" : "Validate the Order status should be open"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Done"],"testStepDescription" : "Click on Done button"}}]}
+											
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_006",
+				"testCaseTitle": "Navigate to Supply chain execution",
+				"testCaseDescription": "Navigate to Procurement page",
+				"dependsOn": "P2P_005",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Navigator"],"testStepDescription" : "Click on Menu Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Supply Chain Execution"], "continueTestNodes" : false, "testStepDescription" : "Validate Supply Chain Execution as side menu title"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Supply Chain Execution"],"testStepDescription" : "Click on Supply Chain Execution Button"}}]},					
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Inventory Management"], "continueTestNodes" : false, "testStepDescription" : "Validate the Purchase Orders link"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Inventory Management"],"testStepDescription" : "Click on Inventory Management Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Inventory Management"], "continueTestNodes" : false, "testStepDescription" : "Validate Inventory Management page"}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Tasks"], "continueTestNodes" : false, "testStepDescription" : "Validate the Tasks bar"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"divWithTitle":{"xpathparams": ["Tasks"],"testStepDescription" : "Click on Tasks Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["Show Tasks"], "continueTestNodes" : false, "testStepDescription" : "Validate the Show Tasks label"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"ddtasks":{"xpathparams": ["Show Tasks"],"testStepDescription" : "Click on Show Tasks drop down"}}]},
+					{"typeTextWithEnter" : [{"ddtasks":{"xpathparams": ["Show Tasks"], "value" : "$receipts", "testStepDescription" : "Select Task as Receipts"}}]},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Receive Expected Shipments"],"testStepDescription" : "Click on Receive Expected Shipments link"}}]}						
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_007",
+				"testCaseTitle": "Receive the Receipts",
+				"testCaseDescription": "Receive receipts and Create receipts",
+				"dependsOn": "P2P_006",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Receive Expected Shipments"], "continueTestNodes" : false, "testStepDescription" : "Validate the Receive Expected Shipments tab"}}									
+								]
+							}
+						]
+					},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["value00::content"], "varName" : "purchaseOrderNumber","testStepDescription": "Enter the purchase order number in the Purchase Order input field"}}]},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Search"],"testStepDescription" : "Click on Search button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"buttonWithTextNS":{"xpathparams":["Receive"], "continueTestNodes" : false, "testStepDescription" : "Validate the Receive button"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"tdwithClass":{"xpathparams": ["xz3"],"testStepDescription" : "Click on line"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"buttonWithTextNS":{"xpathparams":["Receive"], "continueTestNodes" : false, "testStepDescription" : "Validate the Receive button"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Receive"],"testStepDescription" : "Click on Receive button"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["Quantityid::content"], "value" : "$quantity","testStepDescription": "Enter the Quantity in Quantity input field"}}]},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Create Receipt"],"testStepDescription" : "Click on Create Receipt button"}}]},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Submit"],"testStepDescription" : "Click on Submit button"}}]},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["K"],"testStepDescription" : "Click on Ok button"}}]},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Done"],"testStepDescription" : "Click on Done button"}}]}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_008",
+				"testCaseTitle": "Navigate to Payables and invoices",
+				"testCaseDescription": "Navigate to invoices and create invoice",
+				"dependsOn": "P2P_007",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Navigator"],"testStepDescription" : "Click on Menu Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Payables"], "continueTestNodes" : false, "testStepDescription" : "Validate Payables as side menu title"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Payables"],"testStepDescription" : "Click on Payables Button"}}]},					
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Invoices"], "continueTestNodes" : false, "testStepDescription" : "Validate the Invoices link"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Invoices"],"testStepDescription" : "Click on invoicesButton"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Invoices"], "continueTestNodes" : false, "testStepDescription" : "Validate Invoices page"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"divWithTitle":{"xpathparams": ["Tasks"],"testStepDescription" : "Click on Tasks Button"}}]},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Create Invoice"],"testStepDescription" : "Click on Create Invoice link"}}]}						
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_009",
+				"testCaseTitle": "Enter invoice number and amount",
+				"testCaseDescription": "Enter invoice number and total amount with tax then save",
+				"dependsOn": "P2P_008",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Create Invoice:"], "continueTestNodes" : false, "testStepDescription" : "Validate the Create Invoice page"}}									
+								]
+							}
+						]
+					},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["ic1::content"], "varName" : "purchaseOrderNumber","testStepDescription": "Enter the purchase order number in the Identifying PO field"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["i2::content"], "value" : "$invoiceNum","testStepDescription": "Enter the Invoice number in Number input field"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["i3::content"], "varName" : "totalAmount","testStepDescription": "Enter the Amount in Amount input field"}}]},
+					{"typeTextWithTabKey" : [{"tdtext":{"xpathparams": ["i4::content"], "value" : "Procure to pay","testStepDescription": "Enter the Description"}}]},
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Go"],"testStepDescription" : "Click on Go Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Match Invoice Lines"], "continueTestNodes" : false, "testStepDescription" : "Validate Match Invoice Lines as page title"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"checkBoxID":{"xpathparams": ["sb1::content"],"testStepDescription" : "Click on check box Button"}}]},					
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Allocate Distributions"], "continueTestNodes" : false, "testStepDescription" : "Validate Allocate Distributions tab"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Apply"],"testStepDescription" : "Click on Apply button"}}]},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["K"],"testStepDescription" : "Click on ok Button"}}]},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Purchase Order"],"testStepDescription" : "Click on Purchase Order tab"}}]},						
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Save"],"testStepDescription" : "Click on Save button"}}]}						
+							
+							
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_010",
+				"testCaseTitle": "Validate the invoice",
+				"testCaseDescription": "Validate the invoice then save and close",
+				"dependsOn": "P2P_009",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Create Invoice:"], "continueTestNodes" : false, "testStepDescription" : "Validate the Create Invoice page"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Invoice Actions"],"testStepDescription" : "Click on Invoice Actions link"}}]},
+					{"clickElement" : [{"tdwithtext":{"xpathparams": ["Validate"],"testStepDescription" : "Click on Validate Button"}}]},					
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"linkwithText":{"xpathparams":["Validated"], "continueTestNodes" : false, "testStepDescription" : "Validate Validated tab"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Save and Close"],"testStepDescription" : "Click on Save and Close button"}}]}
+										
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_010",
+				"testCaseTitle": "Manage invoices",
+				"testCaseDescription": "Manage invoices and payments",
+				"dependsOn": "P2P_009",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Invoices"], "continueTestNodes" : false, "testStepDescription" : "Validate the Invoices page"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"divWithTitle":{"xpathparams": ["Tasks"],"testStepDescription" : "Click on Tasks Button"}}]},
+					{"clickElement" : [{"linkwithText":{"xpathparams": ["Manage Invoices"],"testStepDescription" : "Click on Manage Invoices link"}}]},						
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Manage Invoices"], "continueTestNodes" : false, "testStepDescription" : "Validate the Manage Invoices page"}}									
+								]
+							}
+						]
+					},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["value10::content"], "value" : "$invoiceNum","testStepDescription": "Enter the Invoice number in Invoice Number input field"}}]},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Search"],"testStepDescription" : "Click on Search button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Search: Invoice"], "continueTestNodes" : false, "testStepDescription" : "Validate the Search: Invoice page"}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"linkwithText":{"xpathparams":["Validated"], "continueTestNodes" : false, "testStepDescription" : "Validate Validated tab"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"tdwithClass":{"xpathparams": ["xz3"],"testStepDescription" : "Click on line"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sideMenuButtons":{"xpathparams":["Pay in Full"], "continueTestNodes" : false, "testStepDescription" : "Validate the Pay in Full button"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Pay in Full"],"testStepDescription" : "Click on Pay in Full button"}}]}					
+							
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "P2P_011",
+				"testCaseTitle": "Payments and post the incoice",
+				"testCaseDescription": "Payment and post the invoice",
+				"dependsOn": "P2P_009",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divwithPartialText":{"xpathparams":["Pay in Full:"], "continueTestNodes" : false, "testStepDescription" : "Validate the Pay in Full: page"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Search: Bank Account"],"testStepDescription" : "Click on Bank Account dropdown"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["bankAccountNamePIFId::content"], "value" : "$bankName","testStepDescription": "Enter the Bank name in the input field"}}]},
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Search: Payment Process Profile"],"testStepDescription" : "Click on Payment Process Profile dropdown"}}]},
+					{"typeTextWithTabKey" : [{"lineInputs":{"xpathparams": ["paymentProfileNameId::content"], "value" : "$paymentProcess","testStepDescription": "Enter the Payment Process in the input field"}}]},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Submit"],"testStepDescription" : "Click on Submit button"}}]},
+					{"clickElement" : [{"buttonConfirmation":{"xpathparams": ["OK","cancel"],"testStepDescription" : "Click on OK button"}}]},						
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithTitle":{"xpathparams":["Search: Invoice"], "continueTestNodes" : false, "testStepDescription" : "Validate the Manage Invoices page"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"anchorWithTtile":{"xpathparams": ["Post"],"testStepDescription" : "Click on Post drop down button"}}]},
+					{"clickElement" : [{"tdwithName":{"xpathparams": ["Post to Ledger"],"testStepDescription" : "Click on Post to Ledger button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"divWithText":{"xpathparams":["Confirmation"], "continueTestNodes" : false, "testStepDescription" : "Validate the Confirmation window"}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"tdwithtext":{"xpathparams":["Accounting is complete."], "continueTestNodes" : false, "testStepDescription" : "Validate Accounting is complete. "}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["View Accounting"],"testStepDescription" : "Click on View Accounting button"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"tdwithtext":{"xpathparams":["Final"], "continueTestNodes" : false, "testStepDescription" : "Validate the status as Final"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonWithTextNS":{"xpathparams": ["Done"],"testStepDescription" : "Click on Done button"}}]},					
+					{"clickElement" : [{"sideMenuButtons":{"xpathparams": ["Done"],"testStepDescription" : "Click on Done button"}}]}					
+					
+							
+				]
+			}
+		}
+		
+		
+					
+	]
+}
+
